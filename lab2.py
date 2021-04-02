@@ -83,7 +83,7 @@ def reliability_gains(p_sys, q_sys, t_sys, p_res, q_res, t_res):
 
 
 def separate_unloaded(t, k, p_sys, q_sys, t_sys):
-    reserved_probabilities = list(map(lambda x: 1 - (1 - x) / factorial(k + 1), probabilities))
+    reserved_probabilities = list(map(lambda x: 1 - (1 - x) ** (k + 1) / factorial(k + 1), probabilities))
     p_res = lab2(reserved_probabilities, link_matrix)
     q_res = 1 - p_res
     t_res = -t / log(p_res)
@@ -107,7 +107,7 @@ def separate_loaded(t, k, p_sys, q_sys, t_sys):
 
 
 def general_unloaded(t, k, p_sys, q_sys, t_sys):
-    q_res = q_sys / factorial(k + 1)
+    q_res = pow(q_sys, (k + 1)) / factorial(k + 1)
     p_res = 1 - q_res
     t_res = -t / log(p_res)
     print("Для системи із загальним ненавантаженим резервуванням\n"
